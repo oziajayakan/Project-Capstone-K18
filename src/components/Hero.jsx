@@ -1,220 +1,224 @@
-import { useState } from 'react';
 import {
     ShieldCheckIcon,
-    LockClosedIcon,
-    CheckCircleIcon,
-    ArrowRightIcon,
-    QrCodeIcon
+    HeartIcon,
+    AcademicCapIcon,
+    HomeModernIcon,
+    SparklesIcon,
+    BanknotesIcon,
+    CalculatorIcon,
+    CheckBadgeIcon,
+    MapPinIcon
 } from '@heroicons/react/24/outline';
 
-const QUICK_NOMINALS = [
-    { label: 'Rp 25.000', value: 25000 },
-    { label: 'Rp 50.000', value: 50000, popular: true },
-    { label: 'Rp 100.000', value: 100000 },
-    { label: 'Rp 250.000', value: 250000 },
-];
-
-const DONATION_TABS = [
-    { id: 'santunan', label: 'Santunan Yatim' },
-    { id: 'pendidikan', label: 'Beasiswa & SPP' },
-    { id: 'pangan', label: 'Pangan & Gizi' },
-    { id: 'zakat', label: 'Zakat / Infaq' },
+const QUICK_SERVICES = [
+    {
+        id: 'zakat',
+        title: 'Zakat Maal & Profesi',
+        subtitle: 'Tunaikan kewajiban zakat 2,5% tepat sasaran',
+        icon: BanknotesIcon,
+        actionType: 'donate',
+        program: 'Zakat Maal / Zakat Penghasilan',
+        amount: 250000
+    },
+    {
+        id: 'infaq',
+        title: 'Infaq & Sedekah Yatim',
+        subtitle: 'Santunan harian & gizi santri mukim asrama',
+        icon: HeartIcon,
+        actionType: 'donate',
+        program: 'Santunan & Pendidikan Anak Yatim',
+        amount: 100000
+    },
+    {
+        id: 'pendidikan',
+        title: 'Beasiswa & Orang Tua Asuh',
+        subtitle: 'Dukung SPP, seragam & tahfidz Al-Qur’an',
+        icon: AcademicCapIcon,
+        actionType: 'anchor',
+        href: '#foster'
+    },
+    {
+        id: 'wakaf',
+        title: 'Wakaf Asrama & Sarana',
+        subtitle: 'Amal jariyah fasilitas tempat tinggal santri',
+        icon: HomeModernIcon,
+        actionType: 'donate',
+        program: 'Wakaf Pemeliharaan Asrama',
+        amount: 500000
+    },
+    {
+        id: 'kalkulator',
+        title: 'Kalkulator Zakat',
+        subtitle: 'Hitung nisab zakat profesi & tabungan Anda',
+        icon: CalculatorIcon,
+        actionType: 'anchor',
+        href: '#zakat'
+    }
 ];
 
 export default function Hero({ onDonateClick }) {
-    const [activeTab, setActiveTab] = useState('santunan');
-    const [selectedAmount, setSelectedAmount] = useState(50000);
-    const [customAmount, setCustomAmount] = useState('');
-
-    const handleQuickDonate = () => {
-        const finalAmount = customAmount ? parseInt(customAmount, 10) : selectedAmount;
-        if (onDonateClick) {
-            onDonateClick({
-                amount: finalAmount,
-                program: DONATION_TABS.find(t => t.id === activeTab)?.label || 'Santunan Yatim'
-            });
-        }
-    };
-
-    const formatIDR = (val) => {
-        if (!val) return 'Rp 0';
-        return new Intl.NumberFormat('id-ID', {
-            style: 'currency',
-            currency: 'IDR',
-            minimumFractionDigits: 0
-        }).format(val);
-    };
-
     return (
-        <section id="hero" className="relative bg-mint border-b border-slate-200/80 py-12 lg:py-20 overflow-hidden">
-            {/* Subtle Architectural Grid Accent */}
+        <section id="hero" className="relative bg-mint border-b border-slate-200/80 pt-10 pb-16 lg:pt-16 lg:pb-20 overflow-hidden">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                {/* Main Hero Banner */}
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
-                    
-                    {/* Left Column: Institutional Message & Trust Metrics (7 Cols) */}
+                    {/* Left Column: Headline & Institutional Message (7 Cols) */}
                     <div className="lg:col-span-7 space-y-6">
-                        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-950/5 border border-emerald-800/15 text-primary text-xs font-semibold">
+                        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-950/5 border border-emerald-800/15 text-primary text-xs font-semibold">
                             <ShieldCheckIcon className="w-4 h-4 text-primary shrink-0" />
-                            <span>Lembaga Kesejahteraan Sosial Anak (LKSA) Terakreditasi</span>
+                            <span>Pondok Yatim & Dhuafa — LKSA Terakreditasi Jombang</span>
                         </div>
 
                         <h1 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-extrabold text-slate-900 leading-[1.15] tracking-tight">
-                            Memuliakan Anak Yatim,{' '}
-                            <span className="text-primary">Menjaga Amanah Umat</span> Secara Transparan.
+                            Bersama Memuliakan{' '}
+                            <span className="text-primary">Anak Yatim & Dhuafa</span> Menuju Kemandirian.
                         </h1>
 
                         <p className="text-base sm:text-lg text-slate-600 leading-relaxed max-w-2xl">
-                            Yayasan Assholihin Candimulyo Jombang membina dan menyantuni anak-anak yatim piatu serta dhuafa melalui pendidikan formal, pembinaan tahfidz Al-Qur&apos;an, dan pemenuhan gizi harian dengan pelaporan kas yang terbuka dan terverifikasi.
+                            <strong>Panti Asuhan As-Sholihin (Yayasan Assholihin Candimulyo Jombang)</strong> merupakan lembaga sosial kemanusiaan dan keagamaan yang berkomitmen mengasuh, mendidik, serta memberdayakan anak-anak yatim piatu dan dhuafa dengan pengelolaan dana ZISWAF yang amanah dan transparan.
                         </p>
 
-                        {/* Hadith Editorial Quote */}
-                        <div className="p-4 sm:p-5 rounded-xl bg-white border border-slate-200/80 shadow-card max-w-xl">
+                        {/* Hadith Quote Box */}
+                        <div className="p-4 sm:p-5 rounded-xl bg-white border border-slate-200/90 shadow-card max-w-xl">
                             <p className="text-sm text-slate-700 italic leading-relaxed">
                                 &ldquo;Aku dan orang yang menanggung (mengasuh) anak yatim berada di surga seperti dua jari ini (jari telunjuk dan jari tengah).&rdquo;
                             </p>
-                            <p className="text-xs font-semibold text-slate-500 mt-1.5">
+                            <p className="text-xs font-semibold text-primary mt-1.5">
                                 — HR. Bukhari No. 5304
                             </p>
                         </div>
 
-                        {/* Institutional Highlights */}
-                        <div className="pt-2 grid grid-cols-3 gap-4 max-w-lg border-t border-slate-200/70">
-                            <div>
-                                <div className="text-xl sm:text-2xl font-bold text-slate-900 tabular-nums">100%</div>
-                                <div className="text-xs text-slate-500 mt-0.5">Tercatat di Buku Kas</div>
-                            </div>
-                            <div>
-                                <div className="text-xl sm:text-2xl font-bold text-slate-900 tabular-nums">QRIS & VA</div>
-                                <div className="text-xs text-slate-500 mt-0.5">Verifikasi Otomatis</div>
-                            </div>
-                            <div>
-                                <div className="text-xl sm:text-2xl font-bold text-slate-900 tabular-nums">E-Kwitansi</div>
-                                <div className="text-xs text-slate-500 mt-0.5">Terkirim via WhatsApp</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* Right Column: Clean Interactive Quick Donation Card (5 Cols) */}
-                    <div className="lg:col-span-5">
-                        <div className="bg-white rounded-2xl border border-slate-200/90 shadow-elevated p-6 sm:p-7">
-                            <div className="flex items-center justify-between mb-5">
-                                <div>
-                                    <span className="text-xs font-semibold uppercase tracking-wider text-primary">
-                                        Layanan Donasi Instan
-                                    </span>
-                                    <h2 className="text-lg font-bold text-slate-900 mt-0.5">
-                                        Salurkan Kebaikan Hari Ini
-                                    </h2>
-                                </div>
-                                <div className="w-10 h-10 rounded-lg bg-primary-light flex items-center justify-center text-primary">
-                                    <QrCodeIcon className="w-5 h-5" />
-                                </div>
-                            </div>
-
-                            {/* Program Category Pills */}
-                            <div className="grid grid-cols-2 sm:grid-cols-4 gap-1.5 p-1 bg-slate-100 rounded-lg mb-5">
-                                {DONATION_TABS.map((tab) => (
-                                    <button
-                                        key={tab.id}
-                                        type="button"
-                                        onClick={() => setActiveTab(tab.id)}
-                                        className={`py-2 px-2 rounded-md text-xs font-semibold transition-all text-center truncate ${
-                                            activeTab === tab.id
-                                                ? 'bg-white text-primary shadow-sm'
-                                                : 'text-slate-600 hover:text-slate-900'
-                                        }`}
-                                    >
-                                        {tab.label}
-                                    </button>
-                                ))}
-                            </div>
-
-                            {/* Preset Nominal Grid */}
-                            <div className="mb-4">
-                                <label className="block text-xs font-semibold text-slate-600 mb-2">
-                                    Pilih Nominal Donasi
-                                </label>
-                                <div className="grid grid-cols-2 gap-2.5">
-                                    {QUICK_NOMINALS.map((item) => {
-                                        const isSelected = !customAmount && selectedAmount === item.value;
-                                        return (
-                                            <button
-                                                key={item.value}
-                                                type="button"
-                                                onClick={() => {
-                                                    setSelectedAmount(item.value);
-                                                    setCustomAmount('');
-                                                }}
-                                                className={`relative py-2.5 px-3 rounded-lg border text-sm font-semibold tabular-nums transition-all text-left flex items-center justify-between ${
-                                                    isSelected
-                                                        ? 'border-primary bg-primary-light/60 text-primary ring-1 ring-primary'
-                                                        : 'border-slate-200 bg-white text-slate-700 hover:border-slate-300 hover:bg-slate-50'
-                                                }`}
-                                            >
-                                                <span>{item.label}</span>
-                                                {item.popular && (
-                                                    <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-amber-100 text-amber-800">
-                                                        Populer
-                                                    </span>
-                                                )}
-                                            </button>
-                                        );
-                                    })}
-                                </div>
-                            </div>
-
-                            {/* Custom Nominal Input */}
-                            <div className="mb-5">
-                                <label className="block text-xs font-semibold text-slate-600 mb-1.5">
-                                    Atau Masukkan Nominal Lainnya
-                                </label>
-                                <div className="relative">
-                                    <span className="absolute inset-y-0 left-0 pl-3.5 flex items-center text-sm font-bold text-slate-400">
-                                        Rp
-                                    </span>
-                                    <input
-                                        type="number"
-                                        min="10000"
-                                        step="5000"
-                                        value={customAmount}
-                                        onChange={(e) => setCustomAmount(e.target.value)}
-                                        placeholder="Contoh: 150000"
-                                        className="w-full pl-10 pr-4 py-2.5 rounded-lg border border-slate-200 text-sm font-semibold text-slate-900 placeholder:font-normal placeholder:text-slate-400 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/15 tabular-nums"
-                                    />
-                                </div>
-                                <p className="text-[11px] text-slate-500 mt-1.5 flex items-center gap-1">
-                                    <CheckCircleIcon className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
-                                    <span>
-                                        Total dipilih:{' '}
-                                        <strong className="text-slate-800 tabular-nums">
-                                            {formatIDR(customAmount ? parseInt(customAmount, 10) : selectedAmount)}
-                                        </strong>{' '}
-                                        — Mendukung opsi anonim (Hamba Allah)
-                                    </span>
-                                </p>
-                            </div>
-
-                            {/* Submit CTA */}
+                        {/* CTA Action Buttons */}
+                        <div className="pt-2 flex flex-wrap items-center gap-3.5">
                             <button
                                 type="button"
-                                onClick={handleQuickDonate}
-                                className="w-full py-3 px-5 rounded-lg bg-primary hover:bg-primary-hover text-white font-semibold text-sm shadow-sm transition-all flex items-center justify-center gap-2"
+                                onClick={() => onDonateClick && onDonateClick()}
+                                className="btn-primary px-6 py-3.5 text-sm sm:text-base shadow-sm"
                             >
-                                <span>Lanjutkan Pembayaran Donasi</span>
-                                <ArrowRightIcon className="w-4 h-4" />
+                                <HeartIcon className="w-5 h-5 stroke-[2.2]" />
+                                <span>Tunaikan Donasi Sekarang</span>
                             </button>
-
-                            {/* Payment Gateway Compliance Footer inside Widget */}
-                            <div className="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-500">
-                                <span className="inline-flex items-center gap-1">
-                                    <LockClosedIcon className="w-3.5 h-3.5 text-slate-400" />
-                                    <span>Enkripsi SSL 256-Bit</span>
-                                </span>
-                                <span>QRIS • Virtual Account • E-Wallet</span>
-                            </div>
+                            <a
+                                href="#programs"
+                                className="btn-outline px-5 py-3.5 text-sm sm:text-base bg-white"
+                            >
+                                <span>Lihat Program Kebaikan</span>
+                            </a>
                         </div>
                     </div>
 
+                    {/* Right Column: Institutional Photo & Profile Showcase (5 Cols) */}
+                    <div className="lg:col-span-5">
+                        <div className="relative rounded-2xl bg-white p-3 border border-slate-200/90 shadow-elevated">
+                            <div className="relative aspect-[4/3] w-full rounded-xl overflow-hidden bg-slate-100">
+                                <img
+                                    src={`${import.meta.env.BASE_URL}img/hero-bg.jpg`}
+                                    alt="Santri Asuh Panti Asuhan As-Sholihin Jombang"
+                                    className="w-full h-full object-cover"
+                                />
+                                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/75 via-slate-900/20 to-transparent flex flex-col justify-end p-5">
+                                    <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-primary text-white text-[11px] font-semibold w-fit mb-2">
+                                        <SparklesIcon className="w-3.5 h-3.5" />
+                                        <span>Asrama Putra & Putri Candimulyo</span>
+                                    </span>
+                                    <h2 className="text-white font-heading font-bold text-base sm:text-lg leading-snug">
+                                        Pengasuhan Berbasis Pesantren, Pendidikan Formal & Tahfidz Al-Qur&apos;an
+                                    </h2>
+                                </div>
+                            </div>
+
+                            {/* Bottom Info Strip inside Photo Frame */}
+                            <div className="mt-3 px-2 py-2 flex items-center justify-between gap-3 text-xs">
+                                <div className="flex items-center gap-2.5">
+                                    <img
+                                        src={`${import.meta.env.BASE_URL}img/logo.png`}
+                                        alt="Logo Yayasan Assholihin"
+                                        className="w-9 h-9 rounded-lg object-contain border border-slate-200 p-0.5 bg-white"
+                                    />
+                                    <div>
+                                        <div className="font-bold text-slate-900 flex items-center gap-1">
+                                            <span>LKSA As-Sholihin Jombang</span>
+                                            <CheckBadgeIcon className="w-4 h-4 text-primary" />
+                                        </div>
+                                        <div className="text-[11px] text-slate-500 flex items-center gap-1">
+                                            <MapPinIcon className="w-3 h-3" />
+                                            <span>Desa Candimulyo, Kec. Jombang</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a
+                                    href="#rekening"
+                                    className="text-xs font-semibold text-primary hover:underline shrink-0"
+                                >
+                                    Cek QRIS & Rekening →
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Quick Access Bar ala PondokYatim.or.id (5 Pillars) */}
+                <div className="mt-12 lg:mt-14 pt-8 border-t border-emerald-900/10">
+                    <div className="flex items-center justify-between mb-4">
+                        <span className="text-xs font-bold uppercase tracking-wider text-primary">
+                            Layanan Utama ZISWAF & Kemanusiaan
+                        </span>
+                        <span className="text-xs text-slate-500 hidden sm:inline">
+                            Pilih layanan untuk menyalurkan kebaikan atau menghitung zakat
+                        </span>
+                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3.5">
+                        {QUICK_SERVICES.map((item) => {
+                            const Icon = item.icon;
+                            if (item.actionType === 'anchor') {
+                                return (
+                                    <a
+                                        key={item.id}
+                                        href={item.href}
+                                        className="group bg-white p-4 rounded-xl border border-slate-200/90 hover:border-primary hover:shadow-card-hover transition-all flex items-start gap-3.5"
+                                    >
+                                        <div className="w-10 h-10 rounded-lg bg-primary-light text-primary group-hover:bg-primary group-hover:text-white transition-colors flex items-center justify-center shrink-0">
+                                            <Icon className="w-5 h-5" />
+                                        </div>
+                                        <div>
+                                            <h3 className="text-sm font-bold text-slate-900 group-hover:text-primary transition-colors">
+                                                {item.title}
+                                            </h3>
+                                            <p className="text-xs text-slate-500 mt-0.5 leading-relaxed">
+                                                {item.subtitle}
+                                            </p>
+                                        </div>
+                                    </a>
+                                );
+                            }
+                            return (
+                                <button
+                                    key={item.id}
+                                    type="button"
+                                    onClick={() =>
+                                        onDonateClick &&
+                                        onDonateClick({
+                                            amount: item.amount,
+                                            program: item.program
+                                        })
+                                    }
+                                    className="group bg-white p-4 rounded-xl border border-slate-200/90 hover:border-primary hover:shadow-card-hover transition-all flex items-start gap-3.5 text-left"
+                                >
+                                    <div className="w-10 h-10 rounded-lg bg-primary-light text-primary group-hover:bg-primary group-hover:text-white transition-colors flex items-center justify-center shrink-0">
+                                        <Icon className="w-5 h-5" />
+                                    </div>
+                                    <div>
+                                        <h3 className="text-sm font-bold text-slate-900 group-hover:text-primary transition-colors">
+                                            {item.title}
+                                        </h3>
+                                        <p className="text-xs text-slate-500 mt-0.5 leading-relaxed">
+                                            {item.subtitle}
+                                        </p>
+                                    </div>
+                                </button>
+                            );
+                        })}
+                    </div>
                 </div>
             </div>
         </section>

@@ -1,7 +1,10 @@
 import { useState } from 'react';
 import Navbar from './Navbar';
 import Hero from './Hero';
+import AboutSection from './AboutSection';
 import Programs from './Programs';
+import ZakatCalculator from './ZakatCalculator';
+import DonationAccounts from './DonationAccounts';
 import Stats from './Stats';
 import Gallery from './Gallery';
 import Contact from './Contact';
@@ -28,7 +31,13 @@ function LandingPage() {
             <main className="flex-1">
                 <Hero onDonateClick={(data) => handleOpenDonate(data)} />
 
+                <AboutSection />
+
                 <Programs onSelectProgram={(data) => handleOpenDonate(data)} />
+
+                <ZakatCalculator onPayZakat={(data) => handleOpenDonate(data)} />
+
+                <DonationAccounts onDonateClick={(data) => handleOpenDonate(data)} />
 
                 <Stats />
 
